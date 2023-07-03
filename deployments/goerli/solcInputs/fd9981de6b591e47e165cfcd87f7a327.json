@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Counter.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity 0.8.19;\r\n\r\ncontract Counter {\r\n    uint256 public counter;\r\n\r\n    event IncrementCounter(uint256 newCounterValue, address msgSender);\r\n\r\n    constructor(uint256 initialCount) {\r\n        counter = initialCount;\r\n    }\r\n\r\n    function increment() external {\r\n        counter++;\r\n        emit IncrementCounter(counter, msg.sender);\r\n    }\r\n}\r\n"
+    },
+    "contracts/Factory.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity 0.8.19;\n\ncontract Factory {\n    mapping(address => uint256) public counter;\n\n    event Deployed(address indexed addr);\n\n    function deploy(\n        bytes memory bytecode, bytes32 salt\n    ) external returns (address addr) {\n        require(\n            bytecode.length > 0,\n            \"Factory.deploy: empty bytecode\"\n        );\n\n        assembly {\n            addr := create2(\n                0,\n                add(bytecode, 0x20),\n                mload(bytecode),\n                salt\n            )\n        }\n\n        require(\n            addr != address(0),\n            \"Factory.deploy: failed deployment\"\n        );\n            \n        emit Deployed(addr);\n    }\n\n    function computeAddress(\n        bytes memory bytecode, bytes32 salt\n    ) external view returns (address) {\n        bytes32 hashed = keccak256(\n            abi.encodePacked(\n                bytes1(0xff),\n                address(this),\n                salt,\n                keccak256(bytecode)\n            )\n        );\n\n        return address(uint160(uint256(hashed)));\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": ["ast"]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
