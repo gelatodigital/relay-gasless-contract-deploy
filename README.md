@@ -2,7 +2,7 @@
 
 This project demonstrates network-agnostic contract deployment using Relay and 1Balance by introducing the [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/src/deploy-sdk/index.ts).
 Contracts are deployed at the same precomputed address on every network using [``Create2``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/contracts/Factory.sol#L15).
-The need for dedicated deployer wallets and native tokens on every network is eliminated providing a seamless developer experience.
+This eliminates the need for dedicated deployer wallets and native tokens on every network providing a seamless developer experience.
 
 ## Implementation
 [Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
