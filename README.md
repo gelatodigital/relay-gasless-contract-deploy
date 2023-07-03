@@ -5,7 +5,7 @@ Contracts are deployed at the same precomputed address on every network using [`
 The need for dedicated deployer wallets and native tokens on every network is eliminated providing a seamless developer experience.
 
 ## Implementation
-[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy`` to deploy to multiple networks at once.
+[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
 
 ```ts
 const contracts = await batchDeploy(
@@ -18,6 +18,9 @@ const contracts = await batchDeploy(
 
 This returns a key-value mapping of chain IDs to deployed contract addresses.  
 If a contract fails to deploy, its corresponding address is ``null``.
+
+> **Note**  
+> This can be the case if a contract is already deployed at the same address or if no factory contract is present on that particular network.
 
 ```ts
 > console.log(contracts);
@@ -45,7 +48,7 @@ Create an API key allowing 1Balance to handle fee payments across all networks:
 3. Add a contract for each network you wish to deploy to:
    - Select the appropriate network
    - Toggle ``Any contract`` or specify the [``Factory``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/src/deploy-sdk/constants.ts#L1) contract address
-5. Get the API key from the ``API key`` section in your App
+5. Get the API key from the ``API key`` section of your App
 
 ## Quick Start
 1. Install dependencies
