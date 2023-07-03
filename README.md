@@ -30,7 +30,7 @@ If a contract fails to deploy, its corresponding address is ``null``.
 Contract addresses can be precomputed using ``computeAddress``.
 
 ```ts
-const address = await computeAddress(bytecode, salt);
+const address = computeAddress(bytecode, salt);
 ```
 
 ## Hardhat Task
