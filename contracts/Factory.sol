@@ -2,8 +2,6 @@
 pragma solidity 0.8.19;
 
 contract Factory {
-    mapping(address => uint256) public counter;
-
     event Deployed(address indexed addr);
 
     function deploy(
