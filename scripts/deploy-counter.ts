@@ -13,13 +13,14 @@ const main = async () => {
   const { data } = counter.getDeployTransaction(5);
   if (!data) throw new Error("Invalid bytecode");
 
+  const bytecode = data.toString();
   const salt = "0x" + "b".repeat(64);
 
   const sponsorApiKey = process.env.SPONSOR_KEY;
   if (!sponsorApiKey) throw new Error("Invalid sponsor key in .env");
 
   const contracts = await batchDeploy(
-    data.toString(),
+    bytecode,
     salt,
     [80001, 5], // Mumbai and Goerli
     sponsorApiKey

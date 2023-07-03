@@ -11,13 +11,10 @@ contract Factory {
         bytes32 salt
     ) external returns (address addr) {
         require(bytecode.length > 0, "Factory.deploy: empty bytecode");
-
         assembly {
             addr := create2(0, add(bytecode, 0x20), mload(bytecode), salt)
         }
-
         require(addr != address(0), "Factory.deploy: failed deployment");
-
         emit Deployed(addr);
     }
 
@@ -33,7 +30,6 @@ contract Factory {
                 keccak256(bytecode)
             )
         );
-
         return address(uint160(uint256(hashed)));
     }
 }
