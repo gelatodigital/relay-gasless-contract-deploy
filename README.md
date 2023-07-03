@@ -20,7 +20,7 @@ This returns a key-value mapping of chain IDs to deployed contract addresses.
 If a contract fails to deploy, its corresponding address is ``null``.
 
 > **Note**  
-> This can be the case if a contract is already deployed at the same address or if no factory contract is present on that particular network.
+> This may be the case if a contract is already deployed at the same address or if no factory contract is present on that particular network.
 
 ```ts
 > console.log(contracts);
