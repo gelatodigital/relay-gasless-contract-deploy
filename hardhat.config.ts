@@ -1,6 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
-import "./tasks/gasless-deploy";
+import "./tasks/gelato-deploy";
 import "@typechain/hardhat";
 import "hardhat-deploy";
 

@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { GELATO_API, FACTORY_ADDRESS } from "./constants";
 import { GelatoRelay, SponsoredCallRequest } from "@gelatonetwork/relay-sdk";
+import { getChainId, isSupported } from "./chains";
 import { poll, jetch } from "./helper";
 import factoryAbi from "./abi/factory.json";
 
@@ -16,15 +17,20 @@ interface TaskStatus {
 }
 
 interface BatchDeployResponse {
-  [chainId: number]: string | null;
+  [chain: number | string]: string | null;
 }
 
 const deploy = async (
   bytecode: string,
   salt: string,
-  chainId: number,
+  chain: number | string,
   sponsorApiKey: string
 ): Promise<string | null> => {
+  const chainId = typeof chain === "string" ? getChainId(chain) : chain;
+
+  if (!chainId || !isSupported(chainId))
+    throw new Error("Network not supported: " + chain);
+
   const factory = new ethers.utils.Interface(factoryAbi);
   const data = factory.encodeFunctionData("deploy", [bytecode, salt]);
 
@@ -56,15 +62,15 @@ const deploy = async (
 const batchDeploy = async (
   bytecode: string,
   salt: string,
-  chainIds: number[],
+  chains: (number | string)[],
   sponsorApiKey: string
 ): Promise<BatchDeployResponse> => {
   const contracts = await Promise.all(
-    chainIds.map((chainId) => deploy(bytecode, salt, chainId, sponsorApiKey))
+    chains.map((chain) => deploy(bytecode, salt, chain, sponsorApiKey))
   );
 
   return contracts.reduce((prev, cur, idx) => {
-    prev[chainIds[idx]] = cur;
+    prev[chains[idx]] = cur;
     return prev;
   }, <BatchDeployResponse>{});
 };
