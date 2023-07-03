@@ -9,7 +9,7 @@ task(
   "Deploys a contract using the Deploy SDK (Relay and 1Balance)"
 )
   .addParam("contract", "The name of the contract")
-  .addParam("chains", "Comma separated list of chain IDs")
+  .addParam("chains", "Comma-separated list of chain IDs")
   .setAction(async (args, { ethers }) => {
     const contract = await ethers.getContractFactory(args.contract as string);
 
