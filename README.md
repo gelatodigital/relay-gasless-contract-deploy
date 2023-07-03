@@ -5,7 +5,7 @@ Contracts are deployed at the same precomputed address on every network using [`
 This eliminates the need for dedicated deployer wallets and native tokens on every network providing a seamless developer experience.
 
 ## Implementation
-[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
+[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing the [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
 
 ```ts
 const contracts = await batchDeploy(
@@ -20,7 +20,7 @@ This returns a key-value mapping of chain IDs to deployed contract addresses.
 If a contract fails to deploy, its corresponding address is ``null``.
 
 > **Note**  
-> This may be the case if a contract is already deployed at the same address or if no factory contract is present on that particular network.
+> A contract may fail to deploy if another contract is already present at the same address or if no factory contract is available on that particular network.
 
 ```ts
 > console.log(contracts);
@@ -30,16 +30,13 @@ If a contract fails to deploy, its corresponding address is ``null``.
 Contract addresses can be precomputed using ``computeAddress``.
 
 ```ts
-const address = await computeAddress(
-  bytecode,
-  salt
-);
+const address = await computeAddress(bytecode, salt);
 ```
 
 ## Hardhat Task
-The example also implements a [``gasless-deploy``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts) hardhat task for contract deployment from the CLI.  
-Simply pass the name of the contract to deploy and a comma-separated list of chain IDs to deploy to.  
-[See below](#quick-start)
+Additionally, the example also implements a [``gasless-deploy``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts) hardhat task for contract deployment from the CLI.  
+Simply pass the name of the contract to deploy and a comma-separated list of chains to deploy to.  
+[See Quick Start](#quick-start)
 
 ## Sponsor API Key
 Create an API key allowing 1Balance to handle fee payments across all networks:
