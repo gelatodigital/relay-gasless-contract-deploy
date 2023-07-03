@@ -14,7 +14,11 @@ const main = async () => {
   if (!data) throw new Error("Invalid bytecode");
 
   const bytecode = data.toString();
-  const salt = "0x" + "b".repeat(64);
+
+  const salt = ethers.utils.solidityPack(
+    ["bytes32"],
+    [ethers.utils.randomBytes(32)]
+  );
 
   const sponsorApiKey = process.env.SPONSOR_KEY;
   if (!sponsorApiKey) throw new Error("Invalid sponsor key in .env");

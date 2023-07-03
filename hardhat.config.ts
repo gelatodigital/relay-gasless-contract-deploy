@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: __dirname + "/.env" });
 
 const ALCHEMY_ID = process.env.ALCHEMY_ID;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+//const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
 
 import assert from "assert";
@@ -37,7 +37,7 @@ const config: HardhatUserConfig = {
       chainId: 80001,
     },
     // Prod
-    avalanche: {
+    /*avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
@@ -92,7 +92,7 @@ const config: HardhatUserConfig = {
       chainId: 80001,
       url: `https://polygon-mumbai.g.alchemy.com/v2/${ALCHEMY_ID}`,
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
-    },
+    },*/
   },
 };
 
