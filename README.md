@@ -5,7 +5,7 @@ Contracts are deployed at the same precomputed address on every network using [`
 This eliminates the need for dedicated deployer wallets and native tokens on every network providing a seamless developer experience.
 
 ## Implementation
-[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts#L31-L36) is as simple as importing the [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
+[Implementation](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gelato-deploy.ts#L33-L38) is as simple as importing the [``deploy-sdk``](https://github.com/gelatodigital/relay-gasless-contract-deploy/tree/main/src/deploy-sdk) and calling ``batchDeploy``.
 
 ```ts
 const contracts = await batchDeploy(
