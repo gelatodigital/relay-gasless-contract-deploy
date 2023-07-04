@@ -34,8 +34,8 @@ const address = computeAddress(bytecode, salt);
 ```
 
 ## Hardhat Task
-Additionally, the example also implements a [``gasless-deploy``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gasless-deploy.ts) hardhat task for contract deployment from the CLI.  
-Simply pass the name of the contract to deploy and a comma-separated list of chains to deploy to.  
+Additionally, the example also implements a [``gelato-deploy``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/tasks/gelato-deploy.ts) hardhat task for contract deployment from the CLI.  
+Simply pass a list of contracts to deploy and a list of chains to deploy to (comma-separated).  
 [See Quick Start](#quick-start)
 
 ## Sponsor API Key
@@ -62,5 +62,5 @@ Create an API key allowing 1Balance to handle fee payments across all networks:
    ```
 7. Deploy [``Counter``](https://github.com/gelatodigital/relay-gasless-contract-deploy/blob/main/contracts/Counter.sol) to Goerli and Mumbai
    ```
-   yarn run hardhat gasless-deploy --contract Counter --chains 5,80001
+   yarn run hardhat gelato-deploy --contracts Counter --chains goerli,mumbai
    ```
