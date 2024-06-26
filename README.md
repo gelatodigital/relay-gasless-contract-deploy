@@ -19,7 +19,7 @@ const contracts = await batchDeploy(
 This returns a key-value mapping of chain IDs to deployed contract addresses.  
 If a contract fails to deploy, its corresponding address is ``null``.
 
-> **Note**  
+> [!NOTE]
 > A contract may fail to deploy if another contract is already present at the same address or if no factory contract is available on that particular network.
 
 ```ts
